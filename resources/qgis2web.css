@@ -109,9 +109,15 @@ html, body {
 	display: inline-block;
 }
 
-th, td {
+th {
     vertical-align: top;
     text-align: left;
+	color: #333;
+}
+
+td {
+    vertical-align: top;
+    text-align: right;
 	color: #333;
 }
 
