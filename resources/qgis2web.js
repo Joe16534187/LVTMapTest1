@@ -79,7 +79,8 @@ closer.onclick = function() {
     return false;
 };
 var overlayPopup = new ol.Overlay({
-    element: container,
+    // element: container, *** commented out to remove popup from map ***
+    element: null,
 	autoPan: true
 });
 map.addOverlay(overlayPopup)
@@ -154,7 +155,7 @@ function createPopupField(currentFeature, currentFeatureKeys, layer) {
                 popupField += '<strong>' + layer.get('fieldAliases')[currentFeatureKeys[i]] + '</strong><br />';
             }
             if (layer.get('fieldImages')[currentFeatureKeys[i]] != "ExternalResource") {
-				popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? autolinker.link(currentFeature.get(currentFeatureKeys[i]).toLocaleString()) + '</td>' : '');
+				popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? autolinker.link(currentFeature.get(currentFeatureKeys[i]).toLocaleString("en-GB", {maximumFractionDigits: 0})) + '</td>' : '');
 			} else {
 				var fieldValue = currentFeature.get(currentFeatureKeys[i]);
 				if (/\.(gif|jpg|jpeg|tif|tiff|png|avif|webp|svg)$/i.test(fieldValue)) {
@@ -164,7 +165,7 @@ function createPopupField(currentFeature, currentFeatureKeys, layer) {
 				} else if (/\.(mp3|wav|ogg|aac|flac)$/i.test(fieldValue)) {
                     popupField += (fieldValue != null ? '<audio controls><source src="images/' + fieldValue.replace(/[\\\/:]/g, '_').trim() + '" type="audio/mpeg">Il tuo browser non supporta il tag audio.</audio></td>' : '');
                 } else {
-					popupField += (fieldValue != null ? autolinker.link(fieldValue.toLocaleString()) + '</td>' : '');
+					popupField += (fieldValue != null ? autolinker.link(fieldValue.toLocaleString("en-GB", {maximumFractionDigits: 0})) + '</td>' : '');
 				}
 			}
             popupText += '<tr>' + popupField + '</tr>';
@@ -318,6 +319,7 @@ var featuresPopupActive = false;
 
 function updatePopup() {
     if (popupContent) {
+        popupContent = popupContent.toLocaleString("en-GB", {maximumFractionDigits: 0})
         content.innerHTML = popupContent;
         container.style.display = 'block';
 		overlayPopup.setPosition(popupCoord);
@@ -358,7 +360,6 @@ function onSingleClickFeatures(evt) {
                         currentFeature = clusteredFeatures[n];
                         currentFeatureKeys = currentFeature.getKeys();
                         popupText += '<li><table>';
-                        popupText += '<a><b>' + layer.get('popuplayertitle') + '</b></a>';
                         popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                         popupText += '</table></li>';    
                     }
@@ -367,7 +368,6 @@ function onSingleClickFeatures(evt) {
                 currentFeatureKeys = currentFeature.getKeys();
                 if (doPopup) {
                     popupText += '<li><table>';
-                    popupText += '<a><b>' + layer.get('popuplayertitle') + '</b></a>';
                     popupText += createPopupField(currentFeature, currentFeatureKeys, layer);
                     popupText += '</table>';
                 }

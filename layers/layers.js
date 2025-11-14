@@ -17,14 +17,15 @@ var lyr_PropertyValuationsPolygons_1 = new ol.layer.Vector({
                 declutter: false,
                 source:jsonSource_PropertyValuationsPolygons_1, 
                 style: style_PropertyValuationsPolygons_1,
-                popuplayertitle: 'Property Valuations, Polygons',
+                popuplayertitle: 'Land Value, Polygons',
                 interactive: true,
-    title: 'Property Valuations, Polygons<br />\
+    'title': 'Land Value, Polygons<br />\
     <img src="styles/legend/PropertyValuationsPolygons_1_0.png" /> 0 - 2<br />\
     <img src="styles/legend/PropertyValuationsPolygons_1_1.png" /> 2 - 249<br />\
     <img src="styles/legend/PropertyValuationsPolygons_1_2.png" /> 249 - 567<br />\
     <img src="styles/legend/PropertyValuationsPolygons_1_3.png" /> 567 - 981<br />\
-    <img src="styles/legend/PropertyValuationsPolygons_1_4.png" /> 981 - 6,206<br />' });
+    <img src="styles/legend/PropertyValuationsPolygons_1_4.png" /> 981 - 6,206<br />'});
+
 var format_PropertyValuations_2 = new ol.format.GeoJSON();
 var features_PropertyValuations_2 = format_PropertyValuations_2.readFeatures(json_PropertyValuations_2, 
             {dataProjection: 'EPSG:4326', featureProjection: 'EPSG:3857'});
@@ -36,14 +37,14 @@ var lyr_PropertyValuations_2 = new ol.layer.Vector({
                 declutter: false,
                 source:jsonSource_PropertyValuations_2, 
                 style: style_PropertyValuations_2,
-                popuplayertitle: 'Property Valuations',
+                popuplayertitle: 'Land Value',
                 interactive: true,
-    title: 'Property Valuations<br />\
+    'title': 'Land Value<br />\
     <img src="styles/legend/PropertyValuations_2_0.png" /> 0 - 2<br />\
     <img src="styles/legend/PropertyValuations_2_1.png" /> 2 - 249<br />\
     <img src="styles/legend/PropertyValuations_2_2.png" /> 249 - 567<br />\
     <img src="styles/legend/PropertyValuations_2_3.png" /> 567 - 981<br />\
-    <img src="styles/legend/PropertyValuations_2_4.png" /> 981 - 6,206<br />' });
+    <img src="styles/legend/PropertyValuations_2_4.png" /> 981 - 6,206<br />'});
 
 lyr_OpenStreetMap_0.setVisible(true);lyr_PropertyValuationsPolygons_1.setVisible(false);lyr_PropertyValuations_2.setVisible(true);
 var layersList = [lyr_OpenStreetMap_0,lyr_PropertyValuationsPolygons_1,lyr_PropertyValuations_2];

@@ -1,3 +1,24 @@
+(function () {
+    // Handle layer switcher radio buttons
+    const radios = document.querySelectorAll('input[name="land-value-layer"]');
+    
+    radios.forEach(radio => {
+        radio.addEventListener('change', function () {
+            if (this.checked) {
+                const layerName = this.value;
+                // Toggle layer visibility
+                window.map.getLayers().forEach(layer => {
+                    if (layer.get('name') === 'PropertyValuations_2') {
+                        layer.setVisible(layerName === 'PropertyValuations_2');
+                    } else if (layer.get('name') === 'PropertyValuationsPolygons_1') {
+                        layer.setVisible(layerName === 'PropertyValuationsPolygons_1');
+                    }
+                });
+            }
+        });
+    });
+})();
+
 (function(){
     // Wait for the map variable to exist, then attach click handler.
     function waitForMap(cb, timeoutMs) {

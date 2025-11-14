@@ -54,3 +54,50 @@ function stripe(stripeWidth, gapWidth, angle, color) {
 
     return outerContext.createPattern(outerCanvas, 'no-repeat');
 };
+
+// More Information modal behaviour
+// Wrap setup to run after DOM is ready so elements exist when we query them
+document.addEventListener('DOMContentLoaded', function () {
+    (function () {
+        const openBtn = document.getElementById('more-info-btn');
+        const modal = document.getElementById('more-info-modal');
+        const closeBtn = document.getElementById('more-info-close');
+        const overlay = modal ? modal.querySelector('.more-info-overlay') : null;
+        let lastActive = null;
+
+        if (!modal || !openBtn) return;
+
+        function showModal() {
+            lastActive = document.activeElement;
+            modal.setAttribute('aria-hidden', 'false');
+            closeBtn && closeBtn.focus();
+            document.addEventListener('keydown', onKeyDown);
+        }
+
+        function hideModal() {
+            modal.setAttribute('aria-hidden', 'true');
+            document.removeEventListener('keydown', onKeyDown);
+            if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
+        }
+
+        function onKeyDown(e) {
+            if (e.key === 'Escape' || e.key === 'Esc') {
+                hideModal();
+            }
+        }
+
+        openBtn.addEventListener('click', function () {
+            showModal();
+        });
+
+        closeBtn && closeBtn.addEventListener('click', function () {
+            hideModal();
+        });
+
+        if (overlay) {
+            overlay.addEventListener('click', function () {
+                hideModal();
+            });
+        }
+    })();
+});
